@@ -6,11 +6,14 @@ var db      = low(adapter);
 // init the data store
 // ----------------------------
 // YOUR CODE
+db.defaults({ posts: [] })
+  .write();
 
+  var posts = db.get('posts');
 // add post
 // ----------------------------
 // YOUR CODE
-
+posts.push({title:'cool',id:'1',published:'false'}).write();
 // count posts
 // ----------------------------
 // YOUR CODE

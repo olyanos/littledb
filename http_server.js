@@ -1,7 +1,8 @@
 // add http server
 // -----------------------
 // YOUR CODE
-
+var express = require('express');
+var app = express();
 var low     = require('lowdb');
 var fs      = require('lowdb/adapters/FileSync');
 var adapter = new fs('db.json');
@@ -9,7 +10,7 @@ var db      = low(adapter);
 
 // configure express to serve static files from public directory
 // ------------------------------------------------------------------
-// YOUR CODE
+app.use(express.static('public'));
 
 // init the data store
 db.defaults({ posts: []}).write();
@@ -17,7 +18,9 @@ db.defaults({ posts: []}).write();
 // list posts
 app.get('/data', function(req, res){     
 
-    // YOUR CODE
+    console.log(db.get('posts').size().value());
+    console.log(db.get('posts').value());
+    res.send(db.get('posts').value());
 
 });
 
@@ -62,5 +65,8 @@ app.get('/delete/:id/', function(req, res){
 });
 
 // start server
-// -----------------------
-// YOUR CODE
+app.listen(3000,function(){
+
+    console.log('Running on 3000');
+}
+)
